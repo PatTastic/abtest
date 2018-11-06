@@ -1,6 +1,6 @@
 import http from 'http';
 import httpProxy from 'http-proxy';
-import express from "express";
+import express from 'express';
 let app = express();
 import session from 'express-session';
 
@@ -13,11 +13,11 @@ let apiProxy = httpProxy.createProxy({
 
 
 let aUrls = [
-    "https://rhildred.github.io/",
-    "https://rhildred.github.io/CP202Assignment5/"
+    'https://rhildred.github.io/',
+    'https://rhildred.github.io/CP202Assignment5/'
 ];
 
-app.all("/*", function(req, res) {
+app.all('/*', function(req, res) {
     let nServer = req.session.nServer;
     if(!nServer || nServer < 1 || nServer > aUrls.length){
         nServer = Math.ceil(Math.random() *aUrls.length);
@@ -30,5 +30,5 @@ app.all("/*", function(req, res) {
 // and proxy rules to proxy requests to different targets
 http.createServer(app)
 .listen(app.get('port'), function () {
-  console.log('Example app listening on port ' + app.get('port') + "! Go to https://localhost:" + app.get('port') + "/")
+  console.log('Example app listening on port ' + app.get('port') + '! Go to https://localhost:' + app.get('port') + '/')
 });
