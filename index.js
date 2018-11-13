@@ -13,14 +13,14 @@ let apiProxy = httpProxy.createProxy({
 
 
 let aUrls = [
-    'https://pattastic.github.io/abtest/v1',
-    'https://pattastic.github.io/abtest/v2'
+    'https://pattastic.github.io/abtest-1/',
+    'https://pattastic.github.io/abtest-2/'
 ];
 
 app.all('/*', function(req, res) {
     let nServer = req.session.nServer;
     if(!nServer || nServer < 1 || nServer > aUrls.length){
-        nServer = Math.ceil(Math.random() *aUrls.length);
+        nServer = Math.ceil(Math.random() * aUrls.length);
         req.session.nServer =  nServer;
     }
     apiProxy.web(req, res, {target: aUrls[nServer - 1]});
